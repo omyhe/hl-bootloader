@@ -1,0 +1,33 @@
+import rtconfig
+from building import *
+
+cwd = GetCurrentDir()
+
+src = Glob('../applications/*.c') + Glob('../drivers/*.c') + Glob('../packages/quicklz-v1.0.1/*.c') + Glob('../packages/qboot-latest/src/*.c') + Glob('../packages/crclib-v1.00/src/*.c') + Glob('../libraries/STM32F4xx_HAL_Driver/Src/*.c') + Glob('../libraries/STM32F4xx_HAL_Driver/Src/Legacy/*.c') + Glob('../libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/*.c') + Glob('../libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/*.S') + Glob('../cubemx/EWARM/*.s') + Glob('../cubemx/MDK-ARM/*.s') + Glob('../cubemx/Src/*.c') + Glob('../board/bsp/led/*.c') + Glob('../applications/fal/src/*.c')
+
+CPPPATH = [
+	cwd,
+	cwd + '/../applications',
+	cwd + '/../drivers',
+	cwd + '/../packages/quicklz-v1.0.1',
+	cwd + '/../packages/qboot-latest/inc',
+	cwd + '/../packages/crclib-v1.00/inc',
+	cwd + '/../libraries/STM32F4xx_HAL_Driver/Inc',
+	cwd + '/../libraries/STM32F4xx_HAL_Driver/Inc/Legacy',
+	cwd + '/../libraries/CMSIS/Include',
+	cwd + '/../libraries/CMSIS/RTOS/Template',
+	cwd + '/../libraries/CMSIS/Device/ST/STM32F4xx/Include',
+	cwd + '/../cubemx/Inc',
+	cwd + '/../board/bsp/led',
+	cwd + '/../applications/fal',
+	cwd + '/../applications/fal/inc',
+	str(Dir('#'))
+]
+
+CPPDEFINES = [
+]
+
+group = DefineGroup('Applications', src, depend = [''], CPPPATH = CPPPATH, CPPDEFINES = CPPDEFINES)
+
+Return('group')
+
